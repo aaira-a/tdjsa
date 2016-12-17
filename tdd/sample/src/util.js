@@ -1,5 +1,5 @@
 module.exports = function() {
-    this.f2c = function() {
-        return 0;
+    this.f2c = function(fahrenheit) {
+        return (fahrenheit - 32) * 5 / 9;
     };
 };

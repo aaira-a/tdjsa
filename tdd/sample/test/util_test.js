@@ -14,6 +14,15 @@ describe('util tests', function() {
         expect(celcius).to.eql(0);
     });
 
+    it('should pass if f2c returns 10C for 50F', function() {
+        var fahrenheit = 50;
+
+        var celcius = util.f2c(fahrenheit);
+
+        expect(celcius).to.eql(10);
+    });
+
+
     var util;
     beforeEach(function() {
         util = new Util();
