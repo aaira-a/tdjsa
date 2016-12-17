@@ -6,6 +6,11 @@ describe('util tests', function() {
         expect(true).to.eql(true);
     });
 
+    var util;
+    beforeEach(function() {
+        util = new Util();
+    });
+
     it('should pass if f2c returns 0C for 32F', function() {
         var fahrenheit = 32;
 
@@ -20,11 +25,5 @@ describe('util tests', function() {
         var celcius = util.f2c(fahrenheit);
 
         expect(celcius).to.eql(10);
-    });
-
-
-    var util;
-    beforeEach(function() {
-        util = new Util();
     });
 });
