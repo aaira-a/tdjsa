@@ -1,3 +1,4 @@
 module.exports = function(phrase) {
-    return phrase.split('').reverse().join('') === phrase;
+    return phrase.length > 0 &&
+        phrase.split('').reverse().join('') === phrase;
 };

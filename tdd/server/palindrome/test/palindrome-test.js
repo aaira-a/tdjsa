@@ -17,4 +17,17 @@ describe('palindrome-test', function() {
     it('should return false for argument dude', function() {
         expect(isPalindrome('dude')).to.be.false;
     });
+
+    it('should return true for argument mom mom', function() {
+        expect(isPalindrome('mom mom')).to.be.true;
+    });
+
+    it('should return false for argument mom dad', function() {
+        expect(isPalindrome('mom dad')).to.be.false;
+    });
+
+    it('should return false when argument is an empty string', function() {
+        expect(isPalindrome('')).to.be.false;
+    });
+
 });
