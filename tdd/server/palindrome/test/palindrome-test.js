@@ -9,4 +9,12 @@ describe('palindrome-test', function() {
     it('should return true for argument mom', function() {
         expect(isPalindrome('mom')).to.be.true;
     });
+
+    it('should return true for argument dad', function() {
+        expect(isPalindrome('dad')).to.be.true;
+    });
+
+    it('should return false for argument dude', function() {
+        expect(isPalindrome('dude')).to.be.false;
+    });
 });

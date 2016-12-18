@@ -1,3 +1,3 @@
-module.exports = function(word) {
-    return true;
+module.exports = function(phrase) {
+    return phrase.split('').reverse().join('') === phrase;
 };
