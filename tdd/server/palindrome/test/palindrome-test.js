@@ -30,4 +30,8 @@ describe('palindrome-test', function() {
         expect(isPalindrome('')).to.be.false;
     });
 
+    it('should return false for argument with only two spaces', function() {
+        expect(isPalindrome('  ')).to.be.false;
+    });
+
 });
