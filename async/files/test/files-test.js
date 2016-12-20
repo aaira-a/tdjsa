@@ -5,6 +5,7 @@ describe('test server-side callback', function() {
     it('should return correct lines count for a valid file', function(done) {
         var callback = function(count) {
             expect(count).to.be.eql(15);
+            done();
         };
 
         linesCount('src/files.js', callback);
