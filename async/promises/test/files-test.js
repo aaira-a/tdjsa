@@ -1,5 +1,6 @@
 var expect = require('chai').expect;
 var linesCount = require('../src/files');
+require('chai').use(require('chai-as-promised'));
 
 describe('test promises', function() {
     it('should return correct lines count for a valid file', function(done) {
@@ -19,5 +20,9 @@ describe('test promises', function() {
 
         return linesCount('src/files.js')
             .then(callback);
+    });
+
+    it('should return correct lines count - using eventually', function() {
+        return expect(linesCount('src/files.js')).to.eventually.eql(15);
     });
 });
