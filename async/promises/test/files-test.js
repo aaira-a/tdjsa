@@ -33,4 +33,9 @@ describe('test promises', function() {
     it('should report error for an invalid file name', function(done) {
         expect(linesCount('src/flies.js')).to.be.rejected.notify(done);
     });
+
+    it('should report error for an invalid file name - using with', function(done) {
+        expect(linesCount('src/flies.js'))
+            .to.be.rejectedWith('unable to open file src/flies.js').notify(done);
+    });
 });
