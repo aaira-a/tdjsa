@@ -11,4 +11,13 @@ describe('test promises', function() {
         linesCount('src/files.js')
             .then(checkCount);
     });
+
+    it('should return correct lines count - using return', function() {
+        var callback = function(count) {
+            expect(count).to.be.eql(15);
+        };
+
+        return linesCount('src/files.js')
+            .then(callback);
+    });
 });
