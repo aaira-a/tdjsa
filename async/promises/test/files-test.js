@@ -29,4 +29,8 @@ describe('test promises', function() {
     it('should return correct lines count - using no return', function(done) {
         expect(linesCount('src/files.js')).to.eventually.eql(15).notify(done);
     });
+
+    it('should report error for an invalid file name', function(done) {
+        expect(linesCount('src/flies.js')).to.be.rejected.notify(done);
+    });
 });
