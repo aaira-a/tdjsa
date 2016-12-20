@@ -25,4 +25,8 @@ describe('test promises', function() {
     it('should return correct lines count - using eventually', function() {
         return expect(linesCount('src/files.js')).to.eventually.eql(15);
     });
+
+    it('should return correct lines count - using no return', function(done) {
+        expect(linesCount('src/files.js')).to.eventually.eql(15).notify(done);
+    });
 });
