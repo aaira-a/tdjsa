@@ -16,5 +16,8 @@ var locate = function() {
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 };
 
-var onError = function() {};
+var onError = function(error) {
+    document.getElementById('error').innerHTML = error.message;
+};
+
 var onSuccess = function() {};
