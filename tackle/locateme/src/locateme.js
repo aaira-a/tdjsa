@@ -23,5 +23,7 @@ var onError = function(error) {
 var onSuccess = function(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
-    createURL(latitude, longitude);
+    
+    var url = createURL(latitude, longitude);
+    setLocation(window, url);
 };

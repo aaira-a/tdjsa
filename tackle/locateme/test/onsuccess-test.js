@@ -8,4 +8,18 @@ describe('onSuccess test', function() {
 
         expect(createURLSpy).to.have.been.calledWith(40.41, -105.55);
     });
+
+    it('should call setLocation with URL returned by createURL', function() {
+        var url = 'https://www.example.com';
+
+        sandbox.stub(window, 'createURL')
+            .returns(url);
+
+        var setLocationSpy = sandbox.spy(window, 'setLocation');
+
+        var position = {coords: {latitude: 40.41, longitude: -105.55}};
+        onSuccess(position);
+
+        expect(setLocationSpy).to.have.been.calledWith(window, url);
+    });
 });
