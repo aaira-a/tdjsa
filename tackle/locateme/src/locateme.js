@@ -7,3 +7,7 @@ var createURL = function (latitude, longitude) {
     }
     
 };
+
+var setLocation = function(window, url) {
+    window.location = url;
+};
