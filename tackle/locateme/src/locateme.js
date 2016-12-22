@@ -20,4 +20,8 @@ var onError = function(error) {
     document.getElementById('error').innerHTML = error.message;
 };
 
-var onSuccess = function() {};
+var onSuccess = function(position) {
+    var latitude = position.coords.latitude;
+    var longitude = position.coords.longitude;
+    createURL(latitude, longitude);
+};
