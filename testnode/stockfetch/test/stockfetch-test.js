@@ -20,4 +20,17 @@ describe('Stockfetch tests', function() {
     it('should pass this canary test', function() {
         expect(true).to.be.true;
     });
+
+    it('should invoke error handler for invalid file', function(done) {
+        var onError = function(err) {
+            expect(err).to.be.eql('Error reading file: InvalidFile');
+            done();
+        };
+
+        sandbox.stub(fs, 'readFile', function(fileName, callback) {
+            callback(new Error('failed'));
+        });
+
+        stockfetch.readTickersFile('InvalidFile', onError);
+    });
 });
