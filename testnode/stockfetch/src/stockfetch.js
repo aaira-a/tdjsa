@@ -10,7 +10,12 @@ var Stockfetch = function() {
             }
             else {
                 var tickers = self.parseTickers(data.toString());
+                if(tickers.length === 0) {
+                    onError('File ' + filename + ' has invalid content');
+                }
+                else {
                 self.processTickers(tickers);
+                }
             }
         };
 
