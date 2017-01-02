@@ -67,4 +67,21 @@ describe('Stockfetch tests', function() {
 
         stockfetch.readTickersFile('tickers.txt', onError)
     });
+
+    it('parseTickers should return tickers', function() {
+        expect(stockfetch.parseTickers("A\nB\nC")).to.be.eql(['A', 'B', 'C']);
+    });
+
+    it('parseTickers should return empty array for empty content', function() {
+        expect(stockfetch.parseTickers("")).to.be.eql([]);
+    });
+
+    it('parseTickers should return empty array for white-space', function() {
+        expect(stockfetch.parseTickers(" ")).to.be.eql([]);
+    });
+
+    it('parseTickers should ignore unexpected format in content', function() {
+        var rawData = "AAPL \nBla h\nGOOG\n\n ";
+        expect(stockfetch.parseTickers(rawData)).to.be.eql(['GOOG']);
+    });
 });
