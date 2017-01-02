@@ -2,6 +2,12 @@ var fs = require('fs');
 var http = require('http');
 
 var Stockfetch = function() {
+
+    this.getPriceForTickers = function(fileName, displayFn, errorFn) {
+        this.reportCallback = displayFn;
+        this.readTickersFile(fileName, errorFn);
+    };
+
     this.readTickersFile = function(filename, onError) {
         var self = this;
 
