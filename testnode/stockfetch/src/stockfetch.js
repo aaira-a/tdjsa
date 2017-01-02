@@ -1,4 +1,5 @@
 var fs = require('fs');
+var http = require('http');
 
 var Stockfetch = function() {
     this.readTickersFile = function(filename, onError) {
@@ -38,7 +39,18 @@ var Stockfetch = function() {
 
     this.tickersCount = 0;
 
-    this.getPrice = function() {};
+    this.http = http;
+
+    this.getPrice = function(symbol) {
+        var url = 'http://ichart.finance.yahoo.com/table.csv?s=' + symbol;
+        this.http.get(url, this.processResponse.bind(this, symbol))
+            .on('error', this.processHttpError.bind(this, symbol));
+    };
+
+    this.processResponse = function() {};
+    
+    this.processHttpError = function() {};
+
 };
 
 module.exports = Stockfetch;
