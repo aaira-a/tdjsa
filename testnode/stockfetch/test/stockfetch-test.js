@@ -84,4 +84,21 @@ describe('Stockfetch tests', function() {
         var rawData = "AAPL \nBla h\nGOOG\n\n ";
         expect(stockfetch.parseTickers(rawData)).to.be.eql(['GOOG']);
     });
+
+    it('processTickers should call getPrice for each ticker symbol', function() {
+        var stockfetchMock = sandbox.mock(stockfetch);
+        stockfetchMock.expects('getPrice').withArgs('A');
+        stockfetchMock.expects('getPrice').withArgs('B');
+        stockfetchMock.expects('getPrice').withArgs('C');
+
+        stockfetch.processTickers(['A', 'B', 'C']);
+        stockfetchMock.verify();
+    });
+
+    it('processTickers should save tickers count', function() {
+        sandbox.stub(stockfetch, 'getPrice');
+
+        stockfetch.processTickers(['A', 'B', 'C']);
+        expect(stockfetch.tickersCount).to.be.eql(3);
+    });
 });

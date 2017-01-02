@@ -29,7 +29,16 @@ var Stockfetch = function() {
         return content.split('\n').filter(isInRightFormat);
     };
 
-    this.processTickers = function() {};
+    this.processTickers = function(tickers) {
+        var self = this;
+        self.tickersCount = tickers.length;
+        
+        tickers.forEach(function(ticker) { self.getPrice(ticker); });
+    };
+
+    this.tickersCount = 0;
+
+    this.getPrice = function() {};
 };
 
 module.exports = Stockfetch;
