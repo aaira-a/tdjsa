@@ -240,4 +240,55 @@ describe('Stockfetch tests', function() {
         printReportMock.verify();
     });
 
+    it('printReport should send price, errors once all responses arrive',
+        function() {
+        stockfetch.prices = { 'GOOG': 12.34 };
+        stockfetch.errors = { 'AAPL': 'error' };
+        stockfetch.tickersCount = 2;
+
+        var callbackMock = sandbox.mock(stockfetch)
+            .expects('reportCallback')
+            .withArgs([['GOOG', 12.34]], [['AAPL', 'error']]);
+
+        stockfetch.printReport();
+        callbackMock.verify();
+    });
+
+    it('printReport should not send before all responses arrive',
+        function() {
+        stockfetch.prices = { 'GOOG': 12.34 };
+        stockfetch.errors = { 'AAPL': 'error' };
+        stockfetch.tickersCount = 3;
+
+        var callbackMock = sandbox.mock(stockfetch)
+            .expects('reportCallback')
+            .never();
+
+        stockfetch.printReport();
+        callbackMock.verify();
+    });
+
+    it('printReport should call sortData once for prices, once for errors',
+        function() {
+        stockfetch.prices = { 'GOOG': 12.34 };
+        stockfetch.errors = { 'AAPL': 'error' };
+        stockfetch.tickersCount = 2;
+
+        var mock = sandbox.mock(stockfetch);
+        mock.expects('sortData').withArgs(stockfetch.prices);
+        mock.expects('sortData').withArgs(stockfetch.errors);
+
+        stockfetch.printReport();
+        mock.verify();
+    });
+
+    it('sortData should sort the data based on the symbols', function() {
+        var dataToSort = {
+            'GOOG': 1.2,
+            'AAPL': 2.1
+        };
+
+        var result = stockfetch.sortData(dataToSort);
+        expect(result).to.be.eql([['AAPL', 2.1], ['GOOG', 1.2]]);
+    });
 });
