@@ -147,4 +147,55 @@ describe('Stockfetch tests', function() {
 
         stockfetch.getPrice('GOOG');
     });
+
+    it('processResponse should call parsePrice with valid data', function() {
+        var dataFunction;
+        var endFunction;
+
+        var response = {
+            statusCode: 200,
+            on: function(event, handler) {
+                if(event === 'data') dataFunction = handler;
+                if(event === 'end') endFunction = handler;
+            }
+        };
+
+        var parsePriceMock = 
+            sandbox.mock(stockfetch)
+                .expects('parsePrice').withArgs('GOOG', 'some data');
+
+        stockfetch.processResponse('GOOG', response);
+        dataFunction('some ');
+        dataFunction('data');
+        endFunction();
+
+        parsePriceMock.verify();
+    });
+
+    it('processResponse should call processError if response failed',
+        function() {
+        var response = { statusCode: 404 };
+
+        var processErrorMock = sandbox.mock(stockfetch)
+            .expects('processError')
+            .withArgs('GOOG', 404);
+
+        stockfetch.processResponse('GOOG', response);
+        processErrorMock.verify();
+    });
+
+    it('processResponse should call processError only if response failed',
+        function() {
+        var response = {
+            statusCode: 200,
+            on: function() {}
+        };
+
+        var processErrorMock = sandbox.mock(stockfetch)
+            .expects('processError')
+            .never();
+
+        stockfetch.processResponse('GOOG', response);
+        processErrorMock.verify();
+    });
 });
