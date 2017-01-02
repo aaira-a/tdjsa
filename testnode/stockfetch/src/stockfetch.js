@@ -63,7 +63,9 @@ var Stockfetch = function() {
 
     this.processError = function() {};
     
-    this.processHttpError = function() {};
+    this.processHttpError = function(ticker, error) {
+        this.processError(ticker, error.code);
+    };
 
 };
 
