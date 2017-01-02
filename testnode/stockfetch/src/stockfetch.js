@@ -59,10 +59,23 @@ var Stockfetch = function() {
         }
     };
 
-    this.parsePrice = function() {};
+    this.prices = {};
 
-    this.processError = function() {};
+    this.parsePrice = function(ticker, data) {
+        var price = data.split('\n')[1].split(',').pop();
+        this.prices[ticker] = price;
+        this.printReport();
+    };
+
+    this.errors = {};
+
+    this.processError = function(ticker, error) {
+        this.errors[ticker] = error;
+        this.printReport();
+    };
     
+    this.printReport = function() {};
+
     this.processHttpError = function(ticker, error) {
         this.processError(ticker, error.code);
     };
