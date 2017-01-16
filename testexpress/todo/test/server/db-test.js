@@ -9,4 +9,9 @@ describe('db tests', function() {
     it('get should return null connection by default', function() {
         expect(db.get()).to.be.null;
     });
+
+    it('close should set connection to null', function() {
+        db.close();
+        expect(db.connection).to.be.null;
+    });
 });
