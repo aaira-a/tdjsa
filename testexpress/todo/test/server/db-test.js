@@ -20,4 +20,16 @@ describe('db tests', function() {
         db.close();
         expect(db.connection).to.be.null;
     });
+
+    it('connect should set connection given valid database name',
+        function(done) {
+        var callback = function(err) {
+            expect(err).to.be.null;
+            expect(db.get().databaseName).to.be.eql('todotest');
+            db.close();
+            done();
+        };
+
+        db.connect('mongodb://localhost/todotest', callback);
+    });
 });
