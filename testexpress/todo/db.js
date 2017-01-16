@@ -3,5 +3,10 @@ module.exports = {
 
     get: function() { return this.connection; },
 
-    close: function() { this.connection = null; },
+    close: function() {
+        if(this.connection) {
+            this.connection.close();
+            this.connection = null;
+        }
+    },
 };
