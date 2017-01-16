@@ -32,4 +32,22 @@ describe('db tests', function() {
 
         db.connect('mongodb://localhost/todotest', callback);
     });
+
+    it('connect should reject invalid schema', function(done) {
+        var callback = function(err) {
+            expect(err).to.be.instanceof(Error);
+            done();
+        };
+
+        db.connect('badschema://localhost/todotest', callback);
+    });
+
+    it('connect should reject invalid name', function(done) {
+        var callback = function(err) {
+            expect(err).to.be.instanceof(Error);
+            done();
+        };
+
+        db.connect('mongodb', callback);
+    });
 });

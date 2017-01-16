@@ -8,10 +8,15 @@ module.exports = {
 
         var cacheConnection = function(err, db) {
             self.connection = db;
-            callback(null);
+            callback(err);
         }
 
-        MongoClient.connect(dbname, cacheConnection);
+        try {
+            MongoClient.connect(dbname, cacheConnection);
+        } 
+        catch(ex) {
+            callback(ex);
+        }
     },
 
     get: function() { return this.connection; },
