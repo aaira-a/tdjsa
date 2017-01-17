@@ -35,4 +35,12 @@ describe('task model tests', function() {
         db.get().collection('tasks').drop(done);
     });
 
+    it('all should return all the tasks', function(done) {
+        var callback = function(err, tasks) {
+            expect(tasks).to.eql(sampleTasks);
+            done();
+        };
+
+        task.all(callback);
+    });
 });
