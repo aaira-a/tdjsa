@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var db = require('../../../db');
 var ObjectId = require('mongodb').ObjectId;
 var task = require('../../../models/task');
+var validateTask = require('../../../public/javascripts/common/validate-task');
 
 describe('task model tests', function() {
     var sampleTask;
@@ -85,5 +86,9 @@ describe('task model tests', function() {
         sampleTask = sampleTasks[0];
         delete sampleTask._id;
         task.add(sampleTask, expectError('duplicate task', done))
+    });
+
+    it('task.validate should refer to validateTask', function() {
+        expect(task.validate).to.be.eql(validateTask);
     });
 });

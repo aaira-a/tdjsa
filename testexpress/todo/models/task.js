@@ -1,5 +1,6 @@
 var db = require('../db');
 var ObjectId = require('mongodb').ObjectId;
+var validateTask = require('../public/javascripts/common/validate-task');
 
 var collectionName = 'tasks';
 
@@ -26,4 +27,6 @@ module.exports = {
 
         db.get().collection(collectionName).find(newTask).limit(1).next(found);
     },
+
+    validate: validateTask,
 };
