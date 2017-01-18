@@ -61,4 +61,16 @@ describe('task model tests', function() {
 
         task.get(2319, callback);
     });
+
+    it('add should return null for valid task', function(done) {
+        var callback = function(err) {
+            expect(err).to.be.null;
+            task.all(function(err, tasks) {
+                expect(tasks[3].name).to.be.eql('a new task');
+                done();               
+            });
+        };
+
+        task.add(sampleTask, callback);
+    });
 });
