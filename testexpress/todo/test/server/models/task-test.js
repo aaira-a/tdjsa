@@ -43,4 +43,22 @@ describe('task model tests', function() {
 
         task.all(callback);
     });
+
+    it('get should return task with given id', function(done) {
+        var callback = function(err, task) {
+            expect(task.name).to.be.eql('task1');
+            done();
+        };
+
+        task.get('123412341240', callback);
+    });
+
+    it('get should return null for non-existing task', function(done) {
+        var callback = function(err, task) {
+            expect(task).to.be.null;
+            done();
+        };
+
+        task.get(2319, callback);
+    });
 });
