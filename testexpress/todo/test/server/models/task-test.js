@@ -91,4 +91,33 @@ describe('task model tests', function() {
     it('task.validate should refer to validateTask', function() {
         expect(task.validate).to.be.eql(validateTask);
     });
+
+    it('add should call validate', function(done) {
+        validateCalled = false;
+
+        task.validate = function(task) {
+            expect(task).to.be.eql(sampleTask);
+            validateCalled = true;
+            return validateTask(task);
+        };
+
+        task.add(sampleTask, done);
+
+        expect(validateCalled).to.be.true;
+
+        task.validate = validateTask;
+    });
+
+    it('add should handle validation failure', function(done) {
+        var onError = function(err) {
+            expect(err.message).to.be.eql('unable to add task');
+            done();
+        };
+
+        task.validate = function(task) { return false; };
+
+        task.add(sampleTask, onError);
+
+        task.validateTask = validateTask;
+    });
 });
