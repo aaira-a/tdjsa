@@ -120,4 +120,16 @@ describe('task model tests', function() {
 
         task.validateTask = validateTask;
     });
+
+    it('delete should send null after deleting existing task', function(done) {
+        var callback = function(err) {
+            expect(err).to.be.null;
+            task.all(function(err, tasks) {
+                expect(tasks.length).to.be.eql(2);
+                done();
+            });
+        };
+
+        task.delete('123412341242', callback);
+    });
 });

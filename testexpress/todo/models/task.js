@@ -34,4 +34,13 @@ module.exports = {
     },
 
     validate: validateTask,
+
+    delete: function(taskId, callback) {
+        var handleDelete = function(err, result) {
+            callback(null);
+        };
+
+        db.get().collection(collectionName)
+            .deleteOne({'_id': new ObjectId(taskId)}, handleDelete);
+    },
 };
