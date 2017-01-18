@@ -132,4 +132,15 @@ describe('task model tests', function() {
 
         task.delete('123412341242', callback);
     });
+
+    it('delete should return Error if task not found', function(done) {
+        task.delete('123412341234123412342319',
+            expectError('unable to delete task with id: 123412341234123412342319', 
+                done));
+    });
+
+    it('delete should return Error if task id not given', function(done) {
+        task.delete(undefined,
+            expectError('unable to delete task with id: undefined', done));
+    });
 });

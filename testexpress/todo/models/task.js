@@ -37,6 +37,10 @@ module.exports = {
 
     delete: function(taskId, callback) {
         var handleDelete = function(err, result) {
+            if(result.deletedCount != 1) {
+                callback(new Error('unable to delete task with id: ' + taskId));
+            }
+
             callback(null);
         };
 
