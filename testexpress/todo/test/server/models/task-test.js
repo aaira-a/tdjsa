@@ -73,4 +73,17 @@ describe('task model tests', function() {
 
         task.add(sampleTask, callback);
     });
+
+    var expectError = function(message, done) {
+        return function(err) {
+            expect(err.message).to.be.eql(message);
+            done();
+        };
+    };
+
+    it('add should return Error if task already exists', function(done) {
+        sampleTask = sampleTasks[0];
+        delete sampleTask._id;
+        task.add(sampleTask, expectError('duplicate task', done))
+    });
 });

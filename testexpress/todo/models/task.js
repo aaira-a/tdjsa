@@ -14,6 +14,16 @@ module.exports = {
     },
 
     add: function(newTask, callback) {
-        db.get().collection(collectionName).insertOne(newTask, callback);
+
+        var found = function(err, task) {
+            if(task) {
+                callback(new Error('duplicate task'));
+            }
+            else {
+                db.get().collection(collectionName).insertOne(newTask, callback);
+            }
+        };
+
+        db.get().collection(collectionName).find(newTask).limit(1).next(found);
     },
 };
