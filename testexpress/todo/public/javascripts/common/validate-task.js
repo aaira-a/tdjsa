@@ -1,5 +1,5 @@
 var validateTask = function(task) {
-    if(task) {
+    if(task && task.name) {
         return true;
     }
     else {

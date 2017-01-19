@@ -25,4 +25,16 @@ describe('validate task tests', function() {
     it('should return false for null task', function() {
         expect(validateTask(null)).to.be.false;
     });
+
+    it('should return false for undefined name', function() {
+        expectFailForProperty('name', undefined);
+    });
+
+    it('should return false for null name', function() {
+        expectFailForProperty('name', null);
+    });
+
+    it('should return false for empty name', function() {
+        expectFailForProperty('name', '');
+    });
 });
