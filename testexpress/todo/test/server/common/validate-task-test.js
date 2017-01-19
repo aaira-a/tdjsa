@@ -17,4 +17,12 @@ describe('validate task tests', function() {
     it('should return true for valid task', function() {
         expect(validateTask(sampleTask)).to.be.true;
     });
+
+    it('should return false for undefined task', function() {
+        expect(validateTask(undefined)).to.be.false;
+    });
+
+    it('should return false for null task', function() {
+        expect(validateTask(null)).to.be.false;
+    });
 });

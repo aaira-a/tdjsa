@@ -1,5 +1,10 @@
 var validateTask = function(task) {
-    return true;
+    if(task) {
+        return true;
+    }
+    else {
+        return false;
+    }
 };
 
 (typeof module !== 'undefined') && (module.exports = validateTask);
