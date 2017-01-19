@@ -1,5 +1,6 @@
 var validateTask = function(task) {
-    if(task && task.name) {
+    if(task && task.name &&
+        task.month && !isNaN(task.month)) {
         return true;
     }
     else {
