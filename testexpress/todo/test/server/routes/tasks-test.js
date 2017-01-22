@@ -85,4 +85,8 @@ describe('tasks route test', function() {
         registeredCallback(req, res);
     });
 
+    it('should register URI / for post', function() {
+        expect(router.post.calledWith('/', sandbox.match.any)).to.be.true;
+    });
+
 });
