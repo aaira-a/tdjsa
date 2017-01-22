@@ -126,6 +126,18 @@ describe('tasks route test', function() {
         expect(router.delete.calledWith('/:id', sandbox.match.any)).to.be.true;
     });
 
+    it("delete :/validid handler should call model's delete & return success",
+        function(done) {
+        sandbox.stub(task, 'delete', function(id, callback) {
+            expect(id).to.be.eql(req.params.id);
+            callback(null);
+        });
 
+        var req = {params: {id: 1}};
+        var res = stubResSend('task deleted', done);
+
+        registeredCallback = router.delete.firstCall.args[1];
+        registeredCallback(req, res);
+    });
 
 });
