@@ -49,4 +49,8 @@ describe('tasks route test', function() {
         registeredCallback(req, res);
     });
 
+    it('should register URI /:id for get', function() {
+        expect(router.get.calledWith('/:id', sandbox.match.any)).to.be.true;
+    });
+
 });
