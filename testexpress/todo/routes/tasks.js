@@ -20,8 +20,13 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    task.add(req.body, function() {
-        res.send('task added');
+    task.add(req.body, function(err) {
+        if(err) {
+            res.send(err.message);    
+        }
+        else {
+            res.send('task added');
+        }
     });
 });
 

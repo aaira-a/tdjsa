@@ -106,4 +106,20 @@ describe('tasks route test', function() {
 
     });
 
+    it("post / handler should return error message on failure",
+        function(done) {
+        var sampleTask = {name: 't1', month:12, day: 1, year: 2016};
+
+        sandbox.stub(task, 'add', function(newTask, callback) {
+            expect(newTask).to.be.eql(sampleTask);
+            callback(new Error('unable to add task'));
+        });
+
+        var req = {body: sampleTask};
+        var res = stubResSend('unable to add task', done);
+
+        var registeredCallback = router.post.firstCall.args[1];
+        registeredCallback(req, res);
+    });
+
 });
