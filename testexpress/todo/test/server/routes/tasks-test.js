@@ -53,4 +53,20 @@ describe('tasks route test', function() {
         expect(router.get.calledWith('/:id', sandbox.match.any)).to.be.true;
     });
 
+    it("get /:validid handler should call model's get & return a task",
+        function(done) {
+        var sampleTask = [{name: 't1', month: 12, day: 1, year: 2016}];
+        
+        sandbox.stub(task, 'get', function(id, callback) {
+            expect(id).to.be.eql(req.params.id);
+            callback(null, sampleTask);
+        });
+
+        var req = {params: {id: 2319}};
+        var res = stubResSend(sampleTask, done);
+
+        var registeredCallback = router.get.secondCall.args[1];
+        registeredCallback(req, res);
+    });
+
 });

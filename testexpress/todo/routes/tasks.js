@@ -8,6 +8,11 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:id', function(req, res, next) {});
+router.get('/:id', function(req, res, next) {
+    task.get(req.params.id, function(err, task) {
+        res.send(task);
+    });
+});
+
 
 module.exports = router;
