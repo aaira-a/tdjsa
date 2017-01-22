@@ -69,4 +69,20 @@ describe('tasks route test', function() {
         registeredCallback(req, res);
     });
 
+    it("get /:invalidid handler should call model's get & return {}",
+        function(done){
+        var sampleTask = {};
+
+        sandbox.stub(task, 'get', function(id, callback) {
+            expect(id).to.be.eql(req.params.id);
+            callback(null, null);
+        });
+
+        var req = {params: {id: 2319}};
+        var res = stubResSend(sampleTask, done);
+
+        var registeredCallback = router.get.secondCall.args[1];
+        registeredCallback(req, res);
+    });
+
 });
