@@ -25,6 +25,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+var tasks = require('./routes/tasks');
+app.use('/tasks', tasks);
+
+var db = require('./db');
+db.connect('mongodb://localhost/todo', function(err) {
+  if(err) {
+    console.log('unable to connect to the database');
+    throw(err);
+  }
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
