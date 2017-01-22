@@ -89,4 +89,21 @@ describe('tasks route test', function() {
         expect(router.post.calledWith('/', sandbox.match.any)).to.be.true;
     });
 
+    it("post / handler should call model's add & return success message",
+        function(done) {
+        var sampleTask = {name: 't1', month: 12, day: 1, year: 2016};
+
+        sandbox.stub(task, 'add', function(newTask, callback) {
+            expect(newTask).to.be.eql(sampleTask);
+            callback(null);
+        });
+
+        var req = {body: sampleTask};
+        var res = stubResSend('task added', done);
+
+        var registeredCallback = router.post.firstCall.args[1];
+        registeredCallback(req, res);
+
+    });
+
 });

@@ -19,6 +19,10 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-router.post('/', function(req, res, next) {});
+router.post('/', function(req, res, next) {
+    task.add(req.body, function() {
+        res.send('task added');
+    });
+});
 
 module.exports = router;
