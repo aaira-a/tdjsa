@@ -122,4 +122,10 @@ describe('tasks route test', function() {
         registeredCallback(req, res);
     });
 
+    it('should register URI /:id for delete', function() {
+        expect(router.delete.calledWith('/:id', sandbox.match.any)).to.be.true;
+    });
+
+
+
 });
