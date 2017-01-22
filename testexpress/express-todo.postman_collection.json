@@ -1,0 +1,64 @@
+{
+	"variables": [],
+	"info": {
+		"name": "express-todo",
+		"_postman_id": "d02a065f-8d42-e5c8-c30f-6519fa52bb2f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get all tasks",
+			"request": {
+				"url": "http://localhost:3000/tasks",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get single task",
+			"request": {
+				"url": "http://localhost:3000/tasks/{{id}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "post single task",
+			"request": {
+				"url": "http://localhost:3000/tasks",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"task1\", \"month\": 12, \"day\": 31, \"year\": 2016}\n"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete single task",
+			"request": {
+				"url": "http://localhost:3000/tasks/{{id}}",
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
