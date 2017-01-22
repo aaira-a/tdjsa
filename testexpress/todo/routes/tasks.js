@@ -31,10 +31,14 @@ router.post('/', function(req, res, next) {
 });
 
 router.delete('/:id', function(req, res, next) {
-    task.delete(req.params.id, function() {
+    task.delete(req.params.id, function(err) {
+        if(err) {
+            res.send(err.message);
+        }
+        else {
         res.send('task deleted');
+        }
     });
-
 });
 
 module.exports = router;

@@ -140,4 +140,18 @@ describe('tasks route test', function() {
         registeredCallback(req, res);
     });
 
+    it("delete :/invalidid handler should return error message",
+        function(done) {
+        sandbox.stub(task, 'delete', function(id, callback) {
+            expect(id).to.be.eql(req.params.id);
+            callback(new Error('unable to delete task with id: 2319'));
+        });
+
+        var req = {params: {id: 2319}};
+        var res = stubResSend('unable to delete task with id: 2319', done);
+
+        var registeredCallback = router.delete.firstCall.args[1];
+        registeredCallback(req, res);
+    });
+
 });
