@@ -58,4 +58,8 @@ var addTask = function() {
         data: JSON.stringify(newTask)}, updateMessage);
 };
 
-var updateMessage = function() {};
+var updateMessage = function(status, response) {
+    document.getElementById('message').innerHTML = 
+    response + ' (status: ' + status + ')';
+    getTasks();
+};

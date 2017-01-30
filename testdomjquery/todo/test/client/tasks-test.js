@@ -167,4 +167,17 @@ describe('tasks-with builtin functions-tests', function() {
         addTask();
     });
 
+    it('addTask callback should update message', function() {
+        updateMessage(200, 'added');
+
+        expect(domElements.message.innerHTML).to.be.eql('added (status: 200)');
+    });
+
+    it('addTask callback should call getTasks', function() {
+        var getTasksMock = sandbox.mock(window).expects('getTasks');
+
+        updateMessage(200, 'task added');
+        getTasksMock.verify();
+    });
+
 });
