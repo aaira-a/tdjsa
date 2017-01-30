@@ -5,6 +5,11 @@ var getTasks = function() {
 var callService = function(options, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open(options.method, options.url);
+
+    xhr.onreadystatechange = function() {
+        callback(xhr.status, xhr.response);
+    };
+    
     xhr.send();
 };
 
