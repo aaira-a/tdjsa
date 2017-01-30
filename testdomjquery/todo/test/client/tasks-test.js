@@ -118,4 +118,14 @@ describe('tasks-with builtin functions-tests', function() {
         expect(callback.callCount).to.be.eql(0);
     });
 
+    it('should register initpage handler with window onload', function() {
+        expect(window.onload).to.be.eql(initpage);
+    });
+
+    it('initpage should call getTasks', function(done) {
+        sandbox.stub(window, 'getTasks', done);
+
+        initpage();
+    });
+
 });

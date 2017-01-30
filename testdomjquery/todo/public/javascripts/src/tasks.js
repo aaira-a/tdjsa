@@ -1,3 +1,9 @@
+var initpage = function() {
+    getTasks();
+};
+
+window.onload = initpage;
+
 var getTasks = function() {
     callService({method: 'GET', url: '/tasks'}, updateTasks);
 };
