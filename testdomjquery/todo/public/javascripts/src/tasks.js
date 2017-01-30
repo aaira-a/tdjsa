@@ -66,6 +66,10 @@ var addTask = function() {
     return false;
 };
 
+var deleteTask = function(taskId) {
+    callService({method: 'DELETE', url: '/tasks/' + taskId}, updateMessage);
+};
+
 var updateMessage = function(status, response) {
     document.getElementById('message').innerHTML = 
     response + ' (status: ' + status + ')';
