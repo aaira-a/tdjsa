@@ -9,6 +9,16 @@ var updateTasks = function(status, response) {
         var tasks = JSON.parse(response);
 
         document.getElementById('taskcount').innerHTML = tasks.length;
+
+        var row = function(task) {
+            return '<tr><td>' + task.name + '</td>' +
+                '<td>' + task.month + '/' + task.day + '/' + task.year + '</td>' +
+                '</tr>';
+        };
+
+        var table = '<table>' + tasks.map(row).join('') + '</table>';
+        document.getElementById('tasks').innerHTML = table;
+
     } else {
         var message = response + ' (status: ' + status + ')';
         document.getElementById('message').innerHTML = message;

@@ -62,4 +62,13 @@ describe('tasks-with builtin functions-tests', function() {
         expect(domElements.taskcount.innerHTML).to.be.eql(3);
     });
 
+    it('updateTasks should update tasks table', function() {
+        updateTasks(200, responseStub);
+    
+        expect(domElements.tasks.innerHTML).contains('<table>');
+        expect(domElements.tasks.innerHTML).contains('<td>task a</td>');
+        expect(domElements.tasks.innerHTML).contains('<td>8/1/2016</td>');
+        expect(domElements.tasks.innerHTML).contains('<td>task b</td>');
+    });
+
 });
