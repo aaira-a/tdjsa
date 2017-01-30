@@ -111,4 +111,11 @@ describe('tasks-with builtin functions-tests', function() {
         callback.verify();
     });    
 
+    it('callService should only send when final response received', function() {
+        var callback = sandbox.spy();
+        callService({method: 'GET', url: '/tasks'}, callback);
+
+        expect(callback.callCount).to.be.eql(0);
+    });
+
 });

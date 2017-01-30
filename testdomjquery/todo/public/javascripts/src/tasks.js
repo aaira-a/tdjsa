@@ -7,7 +7,9 @@ var callService = function(options, callback) {
     xhr.open(options.method, options.url);
 
     xhr.onreadystatechange = function() {
-        callback(xhr.status, xhr.response);
+        if(xhr.readyState === 4) {
+            callback(xhr.status, xhr.response);
+        }
     };
     
     xhr.send();
