@@ -41,3 +41,19 @@ var updateTasks = function(status, response) {
         document.getElementById('message').innerHTML = message;
     }
 };
+
+var addTask = function() {
+    var date = new Date(document.getElementById('date').value);
+    var newTask = {
+        name: document.getElementById('name').value,
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        year: date.getFullYear(),
+    };
+
+    callService({method: 'POST', url: '/tasks',
+        contentType: 'application/json',
+        data: JSON.stringify(newTask)}, updateMessage);
+};
+
+var updateMessage = function() {};

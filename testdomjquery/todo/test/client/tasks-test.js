@@ -10,7 +10,10 @@ describe('tasks-with builtin functions-tests', function() {
     beforeEach(function() {
         sandbox = sinon.sandbox.create();
 
-        domElements = {};
+        domElements = {
+            name: {value: 'a new task'},
+            date: {value: '12/11/2016'},
+        };
 
         sandbox.stub(document, 'getElementById', function(id) {
             if(!domElements[id]) {
@@ -126,6 +129,22 @@ describe('tasks-with builtin functions-tests', function() {
         sandbox.stub(window, 'getTasks', done);
 
         initpage();
+    });
+
+    it('addTask should call callService', function(done) {
+        sandbox.stub(window, 'callService',
+            function(params, callback) {
+                expect(params.method).to.be.eql('POST');
+                expect(params.url).to.be.eql('/tasks');
+                expect(params.contentType).to.be.eql('application/json');
+
+                var newTask = '{"name":"a new task","month":12,"day":11,"year":2016}';
+                expect(params.data).to.be.eql(newTask);
+                expect(callback).to.be.eql(updateMessage);
+                done();
+            });
+
+        addTask();
     });
 
 });
