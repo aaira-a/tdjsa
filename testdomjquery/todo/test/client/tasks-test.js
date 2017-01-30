@@ -64,7 +64,7 @@ describe('tasks-with builtin functions-tests', function() {
     it('updateTasks should update taskcount', function() {
         updateTasks(200, responseStub);
 
-        expect(domElements.taskcount.innerHTML).to.be.eql(3);
+        expect(domElements.taskscount.innerHTML).to.be.eql(3);
     });
 
     it('updateTasks should update tasks table', function() {

@@ -25,7 +25,7 @@ var updateTasks = function(status, response) {
     if(status === 200) {
         var tasks = JSON.parse(response);
 
-        document.getElementById('taskcount').innerHTML = tasks.length;
+        document.getElementById('taskscount').innerHTML = tasks.length;
 
         var row = function(task) {
             return '<tr><td>' + task.name + '</td>' +
