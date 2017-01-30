@@ -1,5 +1,6 @@
 var initpage = function() {
     getTasks();
+    document.getElementById('submit').onclick = addTask;
 };
 
 window.onload = initpage;

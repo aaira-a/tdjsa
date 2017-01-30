@@ -180,4 +180,9 @@ describe('tasks-with builtin functions-tests', function() {
         getTasksMock.verify();
     });
 
+    it('initpage should register add task click event', function() {
+        initpage();
+        expect(domElements.submit.onclick).to.be.eql(addTask);
+    });
+
 });
