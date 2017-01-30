@@ -54,9 +54,13 @@ var addTask = function() {
         year: date.getFullYear(),
     };
 
-    callService({method: 'POST', url: '/tasks',
-        contentType: 'application/json',
-        data: JSON.stringify(newTask)}, updateMessage);
+    if(validateTask(newTask)) {
+        callService({method: 'POST', url: '/tasks',
+            contentType: 'application/json',
+            data: JSON.stringify(newTask)}, updateMessage);       
+    } else {
+        updateMessage(0, 'invalid task');
+    }
 
     return false;
 };

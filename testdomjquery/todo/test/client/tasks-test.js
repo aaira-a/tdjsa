@@ -189,4 +189,21 @@ describe('tasks-with builtin functions-tests', function() {
         expect(addTask()).to.be.false;
     });
 
+    it('addTask for invalid task: should skip callServiceMock call but call updateMessage',
+        function() {
+        var updateMessageMock = 
+            sandbox.mock(window)
+                .expects('updateMessage')
+                .withArgs(0, 'invalid task');
+
+        var callServiceMock = sandbox.spy(window, 'callService');
+
+        sandbox.stub(window, 'validateTask')
+            .returns(false);
+
+        addTask();
+        updateMessageMock.verify();
+        expect(callServiceMock).to.not.be.called;
+    });
+
 });
