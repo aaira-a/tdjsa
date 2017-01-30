@@ -79,6 +79,14 @@ describe('tasks-with builtin functions-tests', function() {
         expect(domElements.tasks.innerHTML).contains('<td>task b</td>');
     });
 
+    it('updateTasks should add a link for delete', function() {
+        updateTasks(200, responseStub);
+
+        var expected = '<td>8/1/2016</td>' +
+            '<td><a onclick="deleteTask(\'123412341201\');">delete</a></td>';
+        expect(domElements.tasks.innerHTML).contains(expected);
+    });
+
     it('callService should make call to service', function() {
         callService({method: 'GET', url: '/tasks'}, sandbox.spy());
 
