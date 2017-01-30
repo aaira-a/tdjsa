@@ -4,9 +4,19 @@ describe('tasks-with builtin functions-tests', function() {
     });
 
     var sandbox;
+    var domElements;
 
     beforeEach(function() {
         sandbox = sinon.sandbox.create();
+
+        domElements = {};
+
+        sandbox.stub(document, 'getElementById', function(id) {
+            if(!domElements[id]) {
+                domElements[id] = {};
+            }
+            return domElements[id];
+        });
     });
 
     afterEach(function() {
@@ -31,6 +41,12 @@ describe('tasks-with builtin functions-tests', function() {
 
         getTasks();
         callServiceMock.verify();
+    });
+
+    it('updateTasks should update message if status!=200', function() {
+        updateTasks(404, '..err..');
+
+        expect(domElements.message.innerHTML).to.be.eql('..err.. (status: 404)');
     });
 
 });
