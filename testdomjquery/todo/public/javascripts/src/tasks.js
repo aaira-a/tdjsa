@@ -2,7 +2,11 @@ var getTasks = function() {
     callService({method: 'GET', url: '/tasks'}, updateTasks);
 };
 
-var callService = function() {};
+var callService = function(options, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.method, options.url);
+    xhr.send();
+};
 
 var updateTasks = function(status, response) {
     if(status === 200) {
