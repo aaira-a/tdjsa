@@ -24,4 +24,13 @@ describe('tasks-with builtin functions-tests', function() {
         getTasks();
     });
 
+    it('getTasks should register updateTasks with callService', function() {
+        var callServiceMock = sandbox.mock(window)
+            .expects('callService')
+            .withArgs(sinon.match.any, updateTasks);
+
+        getTasks();
+        callServiceMock.verify();
+    });
+
 });
