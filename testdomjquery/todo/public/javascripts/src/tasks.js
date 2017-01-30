@@ -57,6 +57,8 @@ var addTask = function() {
     callService({method: 'POST', url: '/tasks',
         contentType: 'application/json',
         data: JSON.stringify(newTask)}, updateMessage);
+
+    return false;
 };
 
 var updateMessage = function(status, response) {
