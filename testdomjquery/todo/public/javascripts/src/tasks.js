@@ -5,6 +5,12 @@ var getTasks = function() {
 var callService = function() {};
 
 var updateTasks = function(status, response) {
-    var message = response + ' (status: ' + status + ')';
-    document.getElementById('message').innerHTML = message;
+    if(status === 200) {
+        var tasks = JSON.parse(response);
+
+        document.getElementById('taskcount').innerHTML = tasks.length;
+    } else {
+        var message = response + ' (status: ' + status + ')';
+        document.getElementById('message').innerHTML = message;
+    }
 };
