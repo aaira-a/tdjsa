@@ -18,7 +18,9 @@ var callService = function(options, callback) {
         }
     };
     
-    xhr.send();
+    xhr.setRequestHeader("Content-Type", options.contentType);
+
+    xhr.send(options.data);
 };
 
 var updateTasks = function(status, response) {
