@@ -5,6 +5,12 @@ var jGetTasks = function() {
 var jCallService = function() {};
 
 var jUpdateTasks = function(status, response) {
-	var message = response + ' (status: ' + status + ')';
-	$('#message').html(message);
+	if(status === 200) {
+		var tasks = JSON.parse(response);
+		
+		$('#taskscount').html(tasks.length);
+	} else {
+		var message = response + ' (status: ' + status + ')';
+		$('#message').html(message);
+	}
 };

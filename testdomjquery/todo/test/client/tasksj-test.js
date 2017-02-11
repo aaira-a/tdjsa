@@ -5,6 +5,7 @@ describe('tasks-with builtin functions-tests', function() {
 
     var sandbox;
     var domElements;
+    var responseStub;
 
     beforeEach(function() {
         sandbox = sinon.sandbox.create();
@@ -21,6 +22,12 @@ describe('tasks-with builtin functions-tests', function() {
                 }
             }
         });
+
+        responseStub = JSON.stringify([
+            {_id: '123412341201', name: 'task a', month: 8, day: 1, year: 2016},
+            {_id: '123412341202', name: 'task b', month: 9, day: 10, year: 2016},
+            {_id: '123412341203', name: 'task c', month: 10, day: 11, year: 2017},
+        ]);
     });
 
     afterEach(function() {
@@ -51,5 +58,11 @@ describe('tasks-with builtin functions-tests', function() {
         jUpdateTasks(404, '..err..');
 
         expect(domElements['#message']).to.be.eql('..err.. (status: 404)');
+    });
+
+    it('jUpdateTasks should update taskscount', function() {
+        jUpdateTasks(200, responseStub);
+
+        expect(domElements['#taskscount']).to.be.eql(3);
     });
 });
