@@ -2,7 +2,9 @@ var jGetTasks = function() {
     jCallService({method: 'GET', url: '/tasks'}, jUpdateTasks);
 };
 
-var jCallService = function() {};
+var jCallService = function(options, callback) {
+	$.ajax(options);
+};
 
 var jUpdateTasks = function(status, response) {
 	if(status === 200) {

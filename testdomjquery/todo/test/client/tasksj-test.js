@@ -28,10 +28,15 @@ describe('tasks-with builtin functions-tests', function() {
             {_id: '123412341202', name: 'task b', month: 9, day: 10, year: 2016},
             {_id: '123412341203', name: 'task c', month: 10, day: 11, year: 2017},
         ]);
+
+        xhr = sinon.useFakeXMLHttpRequest();
+        xhr.requests = [];
+        xhr.onCreate = function(req) { xhr.requests.push(req) };
     });
 
     afterEach(function() {
         sandbox.restore();
+        xhr.restore();
     });
 
     it('jGetTasks should call jCallService', function(done) {
@@ -73,6 +78,14 @@ describe('tasks-with builtin functions-tests', function() {
         expect(domElements['#tasks']).contains('<td>task a</td>');
         expect(domElements['#tasks']).contains('<td>8/1/2016</td>');
         expect(domElements['#tasks']).contains('<td>task b</td>');
+    });
+
+    it('jCallService should make call to service', function() {
+        jCallService({method: 'GET', url: '/tasks'}, sinon.spy());
+
+        expect(xhr.requests[0].method).to.be.eql('GET');
+        expect(xhr.requests[0].url).to.be.eql('/tasks');
+        expect(xhr.requests[0].sendFlag).to.be.true;
     });
 
 });
