@@ -1,3 +1,9 @@
+var jInitpage = function() {
+	jGetTasks();
+};
+
+$(document).ready(jInitpage);
+
 var jGetTasks = function() {
     jCallService({method: 'GET', url: '/tasks'}, jUpdateTasks);
 };

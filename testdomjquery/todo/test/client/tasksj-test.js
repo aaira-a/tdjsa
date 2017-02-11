@@ -6,6 +6,7 @@ describe('tasks-with builtin functions-tests', function() {
     var sandbox;
     var domElements;
     var responseStub;
+    var readySpy = sinon.spy($.fn, 'ready');
 
     beforeEach(function() {
         sandbox = sinon.sandbox.create();
@@ -120,6 +121,16 @@ describe('tasks-with builtin functions-tests', function() {
         jCallService({method: 'GET', url: '/tasks', callback});
 
         expect(callback.callCount).to.be.eql(0);
+    });
+
+    it('should register jInitpage handler with document ready', function() {
+        expect(readySpy.firstCall.args[0]).to.be.eql(jInitpage);
+    });
+
+    it('jInitpage should call jGetTasks', function(done) {
+        sandbox.stub(window, 'jGetTasks', done);
+
+        jInitpage();
     });
 
 });
