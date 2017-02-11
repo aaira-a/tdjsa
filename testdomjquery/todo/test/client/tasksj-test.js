@@ -133,4 +133,20 @@ describe('tasks-with builtin functions-tests', function() {
         jInitpage();
     });
 
+    it('jAddTask should call jCallService', function(done) {
+        sandbox.stub(window, 'jCallService',
+            function(params, callback) {
+                expect(params.method).to.be.eql('POST');
+                expect(params.url).to.be.eql('/tasks');
+                expect(params.contentType).to.be.eql('application/json');
+
+                var newTask = '{"name":"a new task","month":12,"day":11,"year":2016}';
+                expect(params.data).to.be.eql(newTask);
+                expect(callback).to.be.eql(jUpdateMessage);
+                done();
+            });
+
+        jAddTask();
+    });
+
 });

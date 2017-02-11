@@ -41,3 +41,19 @@ var jUpdateTasks = function(status, response) {
 		$('#message').html(message);
 	}
 };
+
+var jAddTask = function() {
+    var date = new Date($('#date').val());
+    var newTask = {
+        name: $('#name').val(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        year: date.getFullYear(),
+    };
+
+    jCallService({method: 'POST', url: '/tasks',
+        contentType: 'application/json',
+        data: JSON.stringify(newTask)}, jUpdateMessage);
+};
+
+var jUpdateMessage = function() {};
