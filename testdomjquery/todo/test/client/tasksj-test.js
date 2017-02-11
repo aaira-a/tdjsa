@@ -23,4 +23,13 @@ describe('tasks-with builtin functions-tests', function() {
 
         jGetTasks();
     });
+
+    it('jGetTasks should register jUpdateTasks with jCallService', function() {
+        var jCallServiceMock = sandbox.mock(window)
+            .expects('jCallService')
+            .withArgs(sinon.match.any, jUpdateTasks);
+
+        jGetTasks();
+        jCallServiceMock.verify();
+    });
 });
