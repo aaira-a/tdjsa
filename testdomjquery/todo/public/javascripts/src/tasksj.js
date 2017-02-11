@@ -3,7 +3,16 @@ var jGetTasks = function() {
 };
 
 var jCallService = function(options, callback) {
-	$.ajax(options);
+	$.ajax({
+		method: options.method,
+		url: options.url,
+		success: function(data, status, xhr) {
+			callback(xhr.status, data);
+		},
+		error: function(xhr, status, errorThrown) {
+			callback(xhr.status, xhr.responseText);
+		}
+	});
 };
 
 var jUpdateTasks = function(status, response) {

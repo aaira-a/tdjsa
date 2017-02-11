@@ -88,4 +88,31 @@ describe('tasks-with builtin functions-tests', function() {
         expect(xhr.requests[0].sendFlag).to.be.true;
     });
 
+    it('jCallService should send xhr status code to callback', function() {
+        var callback = sandbox.mock().withArgs(200).atLeast(1);
+
+        jCallService({method: 'GET', url: '/tasks'}, callback);
+        xhr.requests[0].respond(200);
+
+        callback.verify();
+    });
+
+    it('jCallService should send response to callback', function() {
+        var callback = sandbox.mock().withArgs(200, '..res..').atLeast(1);
+
+        jCallService({method: 'GET', url: '/tasks'}, callback);
+        xhr.requests[0].respond(200, {}, '..res..');
+
+        callback.verify();
+    });
+
+    it('jCallService should send error response to callback', function() {
+        var callback = sandbox.mock().withArgs(404, '..err..').atLeast(1);
+
+        jCallService({method: 'GET', url: '/tasks'}, callback);
+        xhr.requests[0].respond(404, {}, '..err..');
+
+        callback.verify();
+    });    
+
 });
