@@ -123,6 +123,31 @@ describe('tasks-with builtin functions-tests', function() {
         expect(callback.callCount).to.be.eql(0);
     });
 
+    it('jCallService should send data to the service', function() {
+        jCallService({method: 'POST', url: '/tasks', data: '...some data...'});
+
+        expect(xhr.requests[0].requestBody).to.be.eql('...some data...');
+    });
+
+    it('ajax should set dataType to text', function() {
+        var ajaxMock = sandbox.mock($, 'ajax', function(options) {
+            expect(options.dataType).to.be.eql('text');
+        });
+    });
+
+    it('jCallService should have default content type', function() {
+        jCallService({method: 'POST', url: '/tasks', data: '...some data...'});
+
+        expect(xhr.requests[0].requestHeaders["Content-Type"]).contains("text/plain");
+    });
+
+    it('jCallService should set content type if present', function() {
+        jCallService({method: 'POST', url: '/tasks', data: '...some data...',
+            contentType: "whatever"});
+
+        expect(xhr.requests[0].requestHeaders["Content-Type"]).contains("whatever");
+    });
+
     it('should register jInitpage handler with document ready', function() {
         expect(readySpy.firstCall.args[0]).to.be.eql(jInitpage);
     });

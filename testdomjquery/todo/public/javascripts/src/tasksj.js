@@ -12,6 +12,9 @@ var jCallService = function(options, callback) {
 	$.ajax({
 		method: options.method,
 		url: options.url,
+		contentType: options.contentType || 'text/plain',
+		dataType: 'text',
+		data: options.data,
 		success: function(data, status, xhr) {
 			callback(xhr.status, data);
 		},
