@@ -4,9 +4,23 @@ describe('tasks-with builtin functions-tests', function() {
     });
 
     var sandbox;
+    var domElements;
 
     beforeEach(function() {
         sandbox = sinon.sandbox.create();
+
+        domElements = {};
+
+        sandbox.stub(window, '$', function(selector) {
+            return {
+                html: function(value) {domElements[selector] = value;},
+                click: function(value) {domElements[selector] = value;},
+                val: function() {
+                    if(selector === '#name') {return 'a new task';}
+                    else {return '12/11/2016';}
+                }
+            }
+        });
     });
 
     afterEach(function() {
@@ -31,5 +45,11 @@ describe('tasks-with builtin functions-tests', function() {
 
         jGetTasks();
         jCallServiceMock.verify();
+    });
+
+    it('jUpdateTasks should update message if status!=200', function() {
+        jUpdateTasks(404, '..err..');
+
+        expect(domElements['#message']).to.be.eql('..err.. (status: 404)');
     });
 });

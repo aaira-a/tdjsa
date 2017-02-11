@@ -4,4 +4,7 @@ var jGetTasks = function() {
 
 var jCallService = function() {};
 
-var jUpdateTasks = function() {};
+var jUpdateTasks = function(status, response) {
+	var message = response + ' (status: ' + status + ')';
+	$('#message').html(message);
+};
