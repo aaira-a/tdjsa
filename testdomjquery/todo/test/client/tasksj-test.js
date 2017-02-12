@@ -174,4 +174,17 @@ describe('tasks-with builtin functions-tests', function() {
         jAddTask();
     });
 
+    it('jAddTask callback should update message', function() {
+        jUpdateMessage(200, 'added');
+
+        expect(domElements['#message']).to.be.eql('added (status: 200)');
+    });
+
+    it('jAddTask callback should call jGetTasks', function() {
+        var jGetTasksMock = sandbox.mock(window).expects('jGetTasks');
+
+        jUpdateMessage(200, 'task added');
+        jGetTasksMock.verify();
+    });
+
 });

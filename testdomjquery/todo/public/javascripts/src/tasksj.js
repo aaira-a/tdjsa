@@ -59,4 +59,8 @@ var jAddTask = function() {
         data: JSON.stringify(newTask)}, jUpdateMessage);
 };
 
-var jUpdateMessage = function() {};
+var jUpdateMessage = function(status, response) {
+	var message = response + ' (status: ' + status + ')';
+	$('#message').html(message);
+	jGetTasks();
+};
