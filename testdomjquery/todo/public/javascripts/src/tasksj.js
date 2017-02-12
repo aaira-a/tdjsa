@@ -67,6 +67,10 @@ var jAddTask = function() {
     return false;
 };
 
+var jDeleteTask = function(taskId) {
+    jCallService({method: 'DELETE', url: '/tasks/' + taskId}, jUpdateMessage);
+};
+
 var jUpdateMessage = function(status, response) {
 	var message = response + ' (status: ' + status + ')';
 	$('#message').html(message);

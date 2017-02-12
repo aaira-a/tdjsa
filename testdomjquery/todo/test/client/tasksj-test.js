@@ -221,4 +221,23 @@ describe('tasks-with builtin functions-tests', function() {
         expect(jCallServiceMock).to.not.be.called;
     });
 
+    it('jDeleteTask should call jCallService', function(done) {
+        sandbox.stub(window, 'jCallService', function(params) {
+            expect(params.method).to.be.eql('DELETE');
+            expect(params.url).to.be.eql('/tasks/123412341203');
+            done();
+        });
+
+        jDeleteTask('123412341203');
+    });
+
+    it('jDeleteTask should register jUpdateMessage', function() {
+        var jCallServiceMock = sandbox.mock(window)
+            .expects('jCallService')
+            .withArgs(sinon.match.any, jUpdateMessage);
+
+        jDeleteTask('123412341203');
+        jCallServiceMock.verify();
+    });
+
 });
