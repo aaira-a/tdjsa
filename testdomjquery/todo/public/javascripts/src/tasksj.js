@@ -34,6 +34,7 @@ var jUpdateTasks = function(status, response) {
         var row = function(task) {
             return '<tr><td>' + task.name + '</td>' +
                 '<td>' + task.month + '/' + task.day + '/' + task.year + '</td>' +
+                '<td><a onclick="jDeleteTask(\'' + task._id + '\');">delete</a></td>' + 
                 '</tr>';
         };
 
