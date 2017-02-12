@@ -187,4 +187,9 @@ describe('tasks-with builtin functions-tests', function() {
         jGetTasksMock.verify();
     });
 
+    it('jInitpage should register add task click event', function() {
+        jInitpage();
+        expect(domElements['#submit']).to.be.eql(jAddTask);
+    });
+
 });

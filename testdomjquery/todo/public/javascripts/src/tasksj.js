@@ -1,5 +1,6 @@
 var jInitpage = function() {
 	jGetTasks();
+	$('#submit').click(jAddTask);
 };
 
 $(document).ready(jInitpage);
