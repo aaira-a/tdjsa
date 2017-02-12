@@ -196,4 +196,21 @@ describe('tasks-with builtin functions-tests', function() {
         expect(jAddTask()).to.be.false;
     });
 
+    it('jAddTask for invalid task: should skip jCallServiceMock call but call jUpdateMessage',
+        function() {
+        var jUpdateMessageMock = 
+            sandbox.mock(window)
+                .expects('jUpdateMessage')
+                .withArgs(0, 'invalid task');
+
+        var jCallServiceMock = sandbox.spy(window, 'jCallService');
+
+        sandbox.stub(window, 'validateTask')
+            .returns(false);
+
+        jAddTask();
+        jUpdateMessageMock.verify();
+        expect(jCallServiceMock).to.not.be.called;
+    });
+
 });

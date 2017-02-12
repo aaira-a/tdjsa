@@ -55,9 +55,13 @@ var jAddTask = function() {
         year: date.getFullYear(),
     };
 
-    jCallService({method: 'POST', url: '/tasks',
-        contentType: 'application/json',
-        data: JSON.stringify(newTask)}, jUpdateMessage);
+    if(validateTask(newTask)) {
+    	jCallService({method: 'POST', url: '/tasks',
+        	contentType: 'application/json',
+        	data: JSON.stringify(newTask)}, jUpdateMessage);    	
+    } else {
+    	jUpdateMessage(0, 'invalid task');
+    }
 
     return false;
 };
