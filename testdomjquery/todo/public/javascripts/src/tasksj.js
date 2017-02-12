@@ -58,6 +58,8 @@ var jAddTask = function() {
     jCallService({method: 'POST', url: '/tasks',
         contentType: 'application/json',
         data: JSON.stringify(newTask)}, jUpdateMessage);
+
+    return false;
 };
 
 var jUpdateMessage = function(status, response) {

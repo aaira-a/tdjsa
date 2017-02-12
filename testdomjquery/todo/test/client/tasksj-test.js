@@ -192,4 +192,8 @@ describe('tasks-with builtin functions-tests', function() {
         expect(domElements['#submit']).to.be.eql(jAddTask);
     });
 
+    it('jAddTask should return false', function() {
+        expect(jAddTask()).to.be.false;
+    });
+
 });
