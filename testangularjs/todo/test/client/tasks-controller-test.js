@@ -64,4 +64,13 @@ describe('tasks controller tests', function() {
         var sorted = controller.sortTasks([task1, task2, task3]);
         expect(sorted).to.be.eql([task2, task3, task1]);
     });
+
+    it('sortTasks should sort on year, month, then day', function() {
+        var task1 = {name: 'task a', month: 2, day: 10, year: 2017};
+        var task2 = {name: 'task c', month: 1, day: 14, year: 2017};
+        var task3 = {name: 'task b', month: 1, day: 9, year: 2017};
+
+        var sorted = controller.sortTasks([task1, task2, task3]);
+        expect(sorted).to.be.eql([task3, task2, task1]);
+    });
 });
