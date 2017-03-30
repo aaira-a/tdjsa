@@ -11,6 +11,10 @@ var TasksController = function(tasksService) {
     controller.updateTasks = function(tasks) {
         controller.tasks = tasks;
     };
+
+    controller.updateError = function(error, status) {
+        controller.message = error + ' (status: ' + status + ')';
+    };
 };
 
 angular.module('todoapp')

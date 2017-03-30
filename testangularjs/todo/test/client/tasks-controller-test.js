@@ -42,4 +42,9 @@ describe('tasks controller tests', function() {
         controller.updateTasks(tasksStub);
         expect(controller.tasks).to.be.eql(tasksStub);
     });
+
+    it('updateError should update message', function() {
+        controller.updateError('Not Found', 404);
+        expect(controller.message).to.be.eql('Not Found (status: 404)');
+    });
 });
