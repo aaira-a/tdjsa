@@ -47,4 +47,12 @@ describe('tasks controller tests', function() {
         controller.updateError('Not Found', 404);
         expect(controller.message).to.be.eql('Not Found (status: 404)');
     });
+
+    it('sortTasks should sort based on year', function() {
+        var task1 = {name: 'task a', month: 1, day: 10, year: 2017};
+        var task2 = {name: 'task b', month: 1, day: 10, year: 2016};
+
+        var sorted = controller.sortTasks([task1, task2]);
+        expect(sorted).to.be.eql([task2, task1]);
+    });
 });

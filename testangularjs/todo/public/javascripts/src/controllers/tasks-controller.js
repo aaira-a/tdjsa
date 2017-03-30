@@ -1,4 +1,4 @@
-var TasksController = function(tasksService) {
+var TasksController = function(tasksService, $filter) {
     var controller = this;
 
     controller.tasks = [];
@@ -15,7 +15,13 @@ var TasksController = function(tasksService) {
     controller.updateError = function(error, status) {
         controller.message = error + ' (status: ' + status + ')';
     };
+
+    controller.sortTasks = function(tasks) {
+        var orderBy = $filter('orderBy');
+        return orderBy(tasks, 'year');
+    };
 };
 
 angular.module('todoapp')
-    .controller('TasksController', ['TasksService', TasksController]);
+    .controller('TasksController', 
+        ['TasksService', '$filter', TasksController]);
