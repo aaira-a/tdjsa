@@ -36,4 +36,10 @@ describe('tasks controller tests', function() {
 
         controller.getTasks();
     });
+
+    it('updateTasks should update tasks', function() {
+        var tasksStub = [{sample: 1}];
+        controller.updateTasks(tasksStub);
+        expect(controller.tasks).to.be.eql(tasksStub);
+    });
 });

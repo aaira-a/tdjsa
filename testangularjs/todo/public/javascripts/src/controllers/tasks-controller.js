@@ -7,6 +7,10 @@ var TasksController = function(tasksService) {
     controller.getTasks = function() {
         tasksService.get(controller.updateTasks, controller.updateError);
     };
+
+    controller.updateTasks = function(tasks) {
+        controller.tasks = tasks;
+    };
 };
 
 angular.module('todoapp')
