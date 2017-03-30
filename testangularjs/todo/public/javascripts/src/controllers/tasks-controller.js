@@ -18,7 +18,7 @@ var TasksController = function(tasksService, $filter) {
 
     controller.sortTasks = function(tasks) {
         var orderBy = $filter('orderBy');
-        return orderBy(tasks, 'year');
+        return orderBy(tasks, ['year', 'month']);
     };
 };
 
