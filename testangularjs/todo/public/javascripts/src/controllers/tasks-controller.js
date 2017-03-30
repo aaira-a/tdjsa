@@ -9,7 +9,7 @@ var TasksController = function(tasksService, $filter) {
     };
 
     controller.updateTasks = function(tasks) {
-        controller.tasks = tasks;
+        controller.tasks = controller.sortTasks(tasks);
     };
 
     controller.updateError = function(error, status) {

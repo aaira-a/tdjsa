@@ -43,6 +43,18 @@ describe('tasks controller tests', function() {
         expect(controller.tasks).to.be.eql(tasksStub);
     });
 
+    it('updateTasks should call sortTasks', function() {
+        var tasksStub = [{sample: 1}];
+
+        controller.sortTasks = function(tasks) {
+            expect(tasks).to.be.eql(tasksStub);
+            return '..sorted..';
+        };
+
+        controller.updateTasks(tasksStub);
+        expect(controller.tasks).to.be.eql('..sorted..');
+    });
+
     it('updateError should update message', function() {
         controller.updateError('Not Found', 404);
         expect(controller.message).to.be.eql('Not Found (status: 404)');
