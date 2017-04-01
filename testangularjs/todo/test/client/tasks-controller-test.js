@@ -99,4 +99,9 @@ describe('tasks controller tests', function() {
     it('should register getTasks as handler for document ready', function() {
         expect(documentReadyHandler).to.be.eql(controller.getTasks);
     });
+
+    it('newTask should have empty `name` and `date` on create', function() {
+        expect(controller.newTask.name).to.be.eql('');
+        expect(controller.newTask.date).to.be.eql('');
+    });
 });

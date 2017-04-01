@@ -3,6 +3,7 @@ var TasksController = function(tasksService, $filter, $document) {
 
     controller.tasks = [];
     controller.message = '';
+    controller.newTask = {name: '', date: ''};
 
     controller.getTasks = function() {
         tasksService.get(controller.updateTasks, controller.updateError);
