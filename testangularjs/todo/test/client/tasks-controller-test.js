@@ -104,4 +104,22 @@ describe('tasks controller tests', function() {
         expect(controller.newTask.name).to.be.eql('');
         expect(controller.newTask.date).to.be.eql('');
     });
+
+    it('should convert newTask with no data to JSON format', function() {
+        var newTask = controller.convertNewTaskToJSON();
+
+        expect(newTask.name).to.be.eql('');
+        expect(newTask.month).to.be.NAN;
+        expect(newTask.day).to.be.NAN;
+        expect(newTask.year).to.be.NAN;
+    });
+
+    it('should convert newTask with data to JSON format', function() {
+        var newTask = {name: 'task a', date: '6/10/2016'};
+        var newTaskJSON = {name: 'task a', month: 6, day: 10, year: 2016};
+
+        controller.newTask = newTask;
+
+        expect(controller.convertNewTaskToJSON()).to.be.eql(newTaskJSON);
+    });
 });

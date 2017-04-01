@@ -22,6 +22,17 @@ var TasksController = function(tasksService, $filter, $document) {
         return orderBy(tasks, ['year', 'month', 'day', 'name']);
     };
 
+    controller.convertNewTaskToJSON = function() {
+        var dateParts = controller.newTask.date.split('/');
+
+        return {
+            name: controller.newTask.name,
+            month: parseInt(dateParts[0]),
+            day: parseInt(dateParts[1]),
+            year: parseInt(dateParts[2])
+        };
+    };
+
     $document.ready(controller.getTasks);
 };
 
