@@ -4,12 +4,13 @@ describe('tasks controller tests', function() {
     });
 
     var controller;
-    var tasksServiceMock;
+    var tasksServiceMock = {};
+    var documentReadyHandler;
 
     beforeEach(module('todoapp'));
 
-    beforeEach(inject(function($controller) {
-        tasksServiceMock = {};
+    beforeEach(inject(function($controller, $document) {
+        $document.ready = function(handler) {documentReadyHandler = handler; };
 
         controller = $controller('TasksController', {
             TasksService: tasksServiceMock
@@ -93,5 +94,9 @@ describe('tasks controller tests', function() {
 
         var sorted = controller.sortTasks([task1, task2, task3]);
         expect(sorted).to.be.eql([task1, task3, task2]);
+    });
+
+    it('should register getTasks as handler for document ready', function() {
+        expect(documentReadyHandler).to.be.eql(controller.getTasks);
     });
 });
