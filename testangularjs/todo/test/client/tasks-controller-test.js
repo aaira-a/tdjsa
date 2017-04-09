@@ -165,4 +165,20 @@ describe('tasks controller tests', function() {
 
         expect(resultOfDisableAddTask).to.be.eql(false);
     });
+
+    it('deleteTask should delete and register updateMessage', function(done) {
+        controller.updateMessage = function() {};
+        controller.updateError = function() {};
+
+        var sampleTaskId = '1234123412341234';
+
+        tasksServiceMock.delete = function(taskId, success, error) {
+            expect(taskId).to.be.eql(sampleTaskId);
+            expect(success).to.be.eql(controller.updateMessage);
+            expect(error).to.be.eql(controller.updateError);
+            done();
+        };
+
+        controller.deleteTask(sampleTaskId);
+    });
 });
