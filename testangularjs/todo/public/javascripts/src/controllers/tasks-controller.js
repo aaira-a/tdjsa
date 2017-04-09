@@ -33,6 +33,13 @@ var TasksController = function(tasksService, $filter, $document) {
         };
     };
 
+    controller.addTask = function() {
+        tasksService.add(
+            controller.convertNewTaskToJSON(controller.newTask),
+            controller.updateMessage,
+            controller.updateError);
+    };
+
     $document.ready(controller.getTasks);
 };
 

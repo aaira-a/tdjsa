@@ -122,4 +122,20 @@ describe('tasks controller tests', function() {
 
         expect(controller.convertNewTaskToJSON()).to.be.eql(newTaskJSON);
     });
+
+    it('addTask should call the service', function(done) {
+        controller.updateMessage = function() {};
+        controller.updateError = function() {};
+
+        var convertedTask = controller.convertNewTaskToJSON(controller.newTask);
+
+        tasksServiceMock.add = function(task, success, error) {
+            expect(task).to.be.eql(convertedTask);
+            expect(success).to.be.eql(controller.updateMessage);
+            expect(error).to.be.eql(controller.updateError);
+            done();
+        };
+
+        controller.addTask();
+    });
 });
