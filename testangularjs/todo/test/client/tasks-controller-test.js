@@ -138,4 +138,10 @@ describe('tasks controller tests', function() {
 
         controller.addTask();
     });
+
+    it('updateMessage should update message and call getTasks', function(done) {
+        controller.getTasks = function() { done(); };
+        controller.updateMessage('good');
+        expect(controller.message).to.be.eql('good');
+    });
 });

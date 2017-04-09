@@ -40,6 +40,11 @@ var TasksController = function(tasksService, $filter, $document) {
             controller.updateError);
     };
 
+    controller.updateMessage = function(message) {
+        controller.message = message;
+        controller.getTasks();
+    };
+
     $document.ready(controller.getTasks);
 };
 
