@@ -12,6 +12,12 @@ var TasksService = function($http) {
             .success(success)
             .error(error);
     };
+
+    service.delete = function(taskId, success, error) {
+        $http.delete('tasks/' + taskId)
+            .success(success)
+            .error(error);
+    };
 };
 
 angular.module('todoapp')

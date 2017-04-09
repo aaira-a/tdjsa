@@ -66,4 +66,30 @@ describe('tasks service tests', function() {
         service.add(newTaskJSON, notCalled, error);
         httpBackend.flush();
     });
+
+    it('delete should call service, register success function', function(done) {
+        httpBackend.expectDELETE('tasks/1234123412341234')
+            .respond(200, 'yup');
+
+        var success = function(data) {
+            expect(data).to.be.eql('yup');
+            done();
+        };
+
+        service.delete('1234123412341234', success, notCalled);
+        httpBackend.flush();
+    });
+
+    it('delete should call service, register error function', function(done) {
+        httpBackend.expectDELETE('tasks/1234123412341234')
+            .respond(500, 'server error');
+
+        var error = function(data) {
+            expect(data).to.be.eql('server error');
+            done();
+        };
+
+        service.delete('1234123412341234', notCalled, error);
+        httpBackend.flush();
+    });
 });
