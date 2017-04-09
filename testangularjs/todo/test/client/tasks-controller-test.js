@@ -144,4 +144,25 @@ describe('tasks controller tests', function() {
         controller.updateMessage('good');
         expect(controller.message).to.be.eql('good');
     });
+
+    it('disableAddTask should make good use of validateTask', function() {
+        var newTask = {name: 'task a', date: '6/10/2016'};
+
+        var originalValidateTask = window.validateTask;
+
+        window.validateTask = function(task) {
+            expect(task.name).to.be.eql(newTask.name);
+            expect(
+                task.month + '/' + task.day + '/' + task.year).to.be.eql(newTask.date);
+            return true;
+        };
+
+        controller.newTask = newTask;
+
+        var resultOfDisableAddTask = controller.disableAddTask();
+
+        window.validateTask = originalValidateTask;
+
+        expect(resultOfDisableAddTask).to.be.eql(false);
+    });
 });

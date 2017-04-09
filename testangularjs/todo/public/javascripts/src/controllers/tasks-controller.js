@@ -45,6 +45,10 @@ var TasksController = function(tasksService, $filter, $document) {
         controller.getTasks();
     };
 
+    controller.disableAddTask = function() {
+        return !validateTask(controller.convertNewTaskToJSON());
+    };
+
     $document.ready(controller.getTasks);
 };
 
