@@ -15,4 +15,19 @@ describe('Google search page tests', function() {
         var inputElement = element(by.xpath('//input[@value="I\'m Feeling Lucky"]'));
         expect(inputElement.isPresent()).to.eventually.be.true;
     });
+
+    it('search brings back an expected result', function() {
+        var inputField = element(by.id('lst-ib'));
+
+        inputField.sendKeys('agilelearner.com');
+        inputField.sendKeys(protractor.Key.ENTER);
+
+        var link = (element(by.xpath("//a[@href='https://www.agilelearner.com/']")));
+
+        browser.wait(function() {
+            return link.isPresent();
+        });
+
+        expect(link.isDisplayed()).to.eventually.eql(true);
+    });
 });
