@@ -15,7 +15,7 @@ TasksJPage.prototype = {
     get tasksAsText() { return fetchById('tasks').getText(); },
     get message() { return fetchById('message').getText(); },
 
-    deleteAt : function(index) {
+    deleteAt: function(index) {
         return element.all(by.linkText('delete')).get(index);
     },
 
