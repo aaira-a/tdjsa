@@ -37,7 +37,7 @@
     "karma-sinon-chai": "^1.2.3",
     "mocha": "^3.0.1",
     "protractor": "^4.0.2",
-    "sinon": "^1.17.5",
+    "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0"
   }
 }
